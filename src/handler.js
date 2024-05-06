@@ -75,8 +75,6 @@ const editNotesById = (request, h) => {
   const { title, tags, body } = request.payload;
   const updatedAt = new Date().toISOString();
 
-  console.log(notes);
-
   const index = notes.findIndex((note) => note.id === id);
 
   if (index === -1) {
@@ -96,7 +94,7 @@ const editNotesById = (request, h) => {
   };
   const response = h.response({
     status: "success",
-    message: `data berhasil diubah!${index},   (${id})`,
+    message: `data berhasil diubah`,
   });
   response.code(201);
   // return response;
@@ -108,23 +106,22 @@ const deleteNotesById = (request, h) => {
   const { id } = request.params;
 
   const index = notes.findIndex((note) => note.id === id);
-  
+
   if (index !== -1) {
-    notes.splice(index,1)
+    notes.splice(index, 1);
     const response = h.response({
-        status: 'success',
-        message: 'data berhasil dihapus'
-    })
+      status: "success",
+      message: "data berhasil dihapus",
+    });
     response.code(201);
-    return response
+    return response;
   }
   const response = h.response({
-    status: 'fail',
-    message: 'data gagal dihapus'
-})
-response.code(501);
-return response
-
+    status: "fail",
+    message: "data gagal dihapus",
+  });
+  response.code(501);
+  return response;
 };
 
 module.exports = {
@@ -132,5 +129,5 @@ module.exports = {
   getAllNotesHandler,
   getNoteById,
   editNotesById,
-  deleteNotesById
+  deleteNotesById,
 };
